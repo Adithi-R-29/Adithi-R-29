@@ -1,0 +1,21 @@
+def maxScore(A, K):
+    N = len(A)
+    
+    # Step 1: Create the score array S
+    S = [i * A[i] for i in range(N)]
+    
+    # Step 2: Calculate the sum of the first K elements
+    current_sum = sum(S[:K])
+    max_sum = current_sum
+    
+    # Step 3: Use sliding window to find the maximum sum of K contiguous elements
+    for i in range(K, N):
+        current_sum += S[i] - S[i - K]
+        max_sum = max(max_sum, current_sum)
+    
+    return max_sum
+
+# Example usage:
+A = [1, 2, 3, 4, 5]
+K = 3
+print(maxScore(A, K))  # Output: maximum score for the contiguous subarray of size K
